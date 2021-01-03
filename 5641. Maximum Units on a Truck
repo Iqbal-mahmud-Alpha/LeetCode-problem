@@ -1,0 +1,33 @@
+class Solution {
+public:
+    
+    int maximumUnits(vector<vector<int>>& v, int tc) {
+        vector<pair<int,int>>p;
+
+    for(int i=0; i<v.size(); i++)
+    {
+        p.push_back(make_pair(v[i][0],v[i][1]));
+    }
+    sort(p.begin(),p.end(),[](pair<int,int>a,pair<int,int>b)
+    {
+        return a.second>b.second;
+    });
+    long long sum=0;
+    for(auto i:p)
+    {
+        if(tc==0)break;
+        else if(tc>=i.first)
+        {
+            sum+=(i.first*i.second);
+            tc-=i.first;
+        }
+        else if(tc<i.first)
+        {
+            sum+=tc*i.second;
+            break;
+        }
+    }
+    return sum;
+        
+    }
+};
